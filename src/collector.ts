@@ -48,7 +48,8 @@ const DEFAULT_OPTIONS = {
     ],
     puppeteerExecutablePath: null as string | null,
     extraChromiumArgs: [] as string[],
-    extraPuppeteerOptions: {} as Partial<PuppeteerLaunchOptions>
+    extraPuppeteerOptions: {} as Partial<PuppeteerLaunchOptions>,
+    catchAllThirdParties: false
 };
 
 export const collect = async (inUrl: string, args: CollectorOptions) => {
@@ -166,7 +167,7 @@ export const collect = async (inUrl: string, args: CollectorOptions) => {
         await setupKeyLoggingInspector(page, logger.warn);
         await setupHttpCookieCapture(page, logger.warn);
         await setupSessionRecordingInspector(page, logger.warn);
-        await setUpThirdPartyTrackersInspector(page, logger.warn, args.enableAdBlock);
+        await setUpThirdPartyTrackersInspector(page, logger.warn, args.enableAdBlock, args.catchAllThirdParties);
 
         if (args.captureHar) {
             har = new PuppeteerHar(page);

@@ -23,7 +23,8 @@ const blockers = {
 export const setUpThirdPartyTrackersInspector = async (
     page: Page,
     eventDataHandler: (event: TrackingRequestEvent) => void,
-    enableAdBlock = false
+    enableAdBlock = false,
+    catchAllThirdParties = false
 ) => {
     if (enableAdBlock) {
         await page.setRequestInterception(true);
@@ -32,14 +33,20 @@ export const setUpThirdPartyTrackersInspector = async (
     page.on('request', async request => {
         let isBlocked = false;
 
+        // change so list name only shows if match is true
         for (const [listName, blocker] of Object.entries(blockers)) {
+
             const { match, filter } = blocker.match(fromPuppeteerDetails(request));
 
-            if (!match) {
-                continue;
+            // changed to account for new parameter
+            if (match) {
+                isBlocked = true;
             }
-
-            isBlocked = true;
+            else {
+                if (!catchAllThirdParties){
+                    continue;
+                }
+            }
 
             const params = new URL(request.url()).searchParams;
             const query = {};
@@ -54,7 +61,7 @@ export const setUpThirdPartyTrackersInspector = async (
             eventDataHandler({
                 data: {
                     query,
-                    filter: filter.toString(),
+                    filter: filter?.toString(),
                     listName
                 },
                 stack: [
