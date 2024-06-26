@@ -7,7 +7,7 @@ const file = 'example.ts';
 console.log(`url: ${url}`);
 
 // Use ts-node to run the TypeScript file
-exec(`npx ts-node ${file}`, (err, stdout, stderr) => {
+exec(`npm ts-node ${file}`, (err, stdout, stderr) => {
   if (err) {
     console.error(`Error: ${err.message}`);
     return;
