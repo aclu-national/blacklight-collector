@@ -4,7 +4,7 @@
 import { spawn } from 'child_process';
 
 const url = process.argv.slice(2);
-const file = '/Users/sanjanaraj/blacklight-fork/example.ts';
+const file = 'https://github.com/aclu-national/blacklight-collector/blob/main/example.ts';
 console.log(`url: ${url}`);
 
 const child = spawn('npx', ['ts-node', file], { stdio: 'inherit' });
