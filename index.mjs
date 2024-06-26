@@ -6,15 +6,17 @@ const url = process.argv.slice(2);
 const file = 'example.ts';
 console.log(`url: ${url}`);
 
-// Use ts-node to run the TypeScript file
-exec(`npm ts-node ${file}`, (err, stdout, stderr) => {
-  if (err) {
-    console.error(`Error: ${err.message}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`stderr: ${stderr}`);
-    return;
-  }
-  console.log(stdout);
-});
+exec(`npm ts-node ${file} ${url}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing ${file}: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.error(`Error output from ${file}: ${stderr}`);
+      return;
+    }
+    console.log("script run, output produced")
+  });
+
+
+
