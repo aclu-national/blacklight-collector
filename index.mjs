@@ -6,7 +6,7 @@ const url = process.argv.slice(2);
 const file = 'example.ts';
 console.log(`url: ${url}`);
 
-exec(`npm ts-node ${file} ${url}`, (error, stdout, stderr) => {
+exec(`npx ts-node example.ts ${url}`, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error executing ${file}: ${error.message}`);
       return;
