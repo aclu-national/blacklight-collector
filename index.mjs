@@ -7,7 +7,7 @@ const file = 'example.ts'
 console.log(`url: ${url}`);
 
 // OR...
-const { exec, spawn } = require('node:child_process');
+import { exec } from 'child_process';
 exec(file, (err, stdout, stderr) => {
   if (err) {
     console.error(err);
