@@ -17,8 +17,8 @@ import { join } from 'path';
         // },
         catchAllThirdParties: true,
         outDir: join(__dirname, 'demo-dir'),
-        blTests: [
-        ],
+        // blTests: [
+        // ],
     };
 
     console.log(`Beginning scan of ${URL}`);
