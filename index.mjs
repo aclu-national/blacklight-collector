@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 // import { exec } from 'child_process';
+import { spawn } from 'child_process';
 
 const url = process.argv.slice(2);
 const file = 'example.ts';
